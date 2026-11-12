@@ -1,0 +1,29 @@
+issue,affected_column,affected_rows,action_taken,reason
+Awkward or misspelled column name ('Time_taken (min)'),Time_taken (min),45584,Renamed to 'Time_taken_min',"Names with spaces, brackets or typos are error-prone in code; values are unchanged"
+Awkward or misspelled column name ('Time_Orderd'),Time_Orderd,45584,Renamed to 'Time_Ordered',"Names with spaces, brackets or typos are error-prone in code; values are unchanged"
+Leading/trailing spaces in text,all text columns,0,No action needed,Checked: none found
+Placeholder text standing for a missing value,all text columns,0,No action needed,Checked: none found
+Same label in different capitalisation,categorical columns,0,No action needed,Checked: none found
+Misspelled label ['Metropolitian'],City,34087,Corrected to ['Metropolitan'],Clear spelling error applied to every occurrence; the meaning is unchanged
+Order_Date stored as text,Order_Date,45584,Converted to a date type (day-month-year),Needed for date filtering and sorting; format verified in Section 3.5
+Invalid time format,Time_Ordered,4068,Set to missing,Not a valid HH:MM time
+Invalid time format,Time_Order_picked,5007,Set to missing,Not a valid HH:MM time
+Whole numbers stored as decimals,Delivery_person_Age,43730,Converted to nullable integer type,Values are whole numbers; the decimal type only existed to hold missing values
+Whole numbers stored as decimals,multiple_deliveries,44591,Converted to nullable integer type,Values are whole numbers; the decimal type only existed to hold missing values
+Ratings outside the assumed 0-5 scale,Delivery_person_Ratings,53,Set to missing,Cannot be valid on a 5-point scale (assumption: scale is 0-5; scale is not documented). The raw file keeps the original values
+"Delivery partner age outside the assumed plausible range (18, 65)",Delivery_person_Age,38,Retained and documented,"Unusual but possible, and the data cannot show whether they are errors; removing them without evidence would be unjustified"
+"Coordinates outside India's range (including 0,0 and negative values)","Restaurant_latitude, Restaurant_longitude, Delivery_location_latitude, Delivery_location_longitude",4071,Retained; added boolean column 'has_valid_coordinates' (False = invalid),"Rows still hold valid delivery times and other fields, and correcting coordinates (e.g. flipping signs) would be guesswork. Later distance analysis should filter on this flag"
+Statistical outliers (outside 1.5 x IQR),Time_taken_min,270,Retained and documented,Extreme values can be genuine (e.g. a slow delivery in bad weather); removal needs a documented reason
+Statistical outliers (outside 1.5 x IQR),Delivery_person_Age,0,No action needed,Checked: none found
+Statistical outliers (outside 1.5 x IQR),Delivery_person_Ratings,1170,Retained and documented,Extreme values can be genuine (e.g. a slow delivery in bad weather); removal needs a documented reason
+Exact duplicate rows,all columns,0,No action needed,Checked: none found
+Same ID with different content,ID,0,No action needed,Checked: none found
+Missing values,Time_Ordered,5799,Retained as missing (not imputed),Imputing would invent values; handling will be decided per analysis in later weeks
+Missing values,Time_Order_picked,5007,Retained as missing (not imputed),Imputing would invent values; handling will be decided per analysis in later weeks
+Missing values,Delivery_person_Ratings,1961,Retained as missing (not imputed),Imputing would invent values; handling will be decided per analysis in later weeks
+Missing values,Delivery_person_Age,1854,Retained as missing (not imputed),Imputing would invent values; handling will be decided per analysis in later weeks
+Missing values,City,1200,Retained as missing (not imputed),Imputing would invent values; handling will be decided per analysis in later weeks
+Missing values,multiple_deliveries,993,Retained as missing (not imputed),Imputing would invent values; handling will be decided per analysis in later weeks
+Missing values,Weather_conditions,616,Retained as missing (not imputed),Imputing would invent values; handling will be decided per analysis in later weeks
+Missing values,Road_traffic_density,601,Retained as missing (not imputed),Imputing would invent values; handling will be decided per analysis in later weeks
+Missing values,Festival,228,Retained as missing (not imputed),Imputing would invent values; handling will be decided per analysis in later weeks
