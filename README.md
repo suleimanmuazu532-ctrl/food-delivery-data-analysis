@@ -1,6 +1,6 @@
 # Food Delivery Data Analysis
 
-Kagnus Data Analytics Internship project. This repository holds all four weekly assignments. Weeks 1 and 2 are complete.
+Kagnus Data Analytics Internship project. This repository holds all four weekly assignments. Weeks 1, 2 and 3 are complete.
 
 ## Project objective
 Act as a junior data analyst for a food-delivery operations team: understand the delivery dataset, check its quality, clean it with every decision justified, and explore how delivery duration varies with fields such as traffic, weather, distance, vehicle type and partner characteristics.
@@ -21,9 +21,15 @@ food-delivery-data-analysis/
 │       └── cleaned_food_delivery.csv  # cleaned dataset (Week 1 output)
 ├── notebooks/
 │   ├── 01_data_understanding_and_cleaning.ipynb
-│   └── 02_exploratory_data_analysis.ipynb
+│   ├── 02_exploratory_data_analysis.ipynb
+│   └── 03_visualization.ipynb
 ├── visualizations/
-│   └── initial_distance_vs_duration.png
+│   ├── initial_distance_vs_duration.png      # Week 2 initial scatter plot
+│   ├── 01_delivery_duration_distribution.png
+│   ├── 02_traffic_comparison.png
+│   ├── 03_weather_comparison.png
+│   ├── 04_distance_vs_duration.png
+│   └── 05_vehicle_comparison.png
 ├── docs/
 │   └── cleaning_log.csv               # issue, affected column, affected rows, action, reason
 ├── README.md
@@ -35,6 +41,7 @@ food-delivery-data-analysis/
 2. Install the packages: `pip install -r requirements.txt`
 3. Start Jupyter and run `notebooks/01_data_understanding_and_cleaning.ipynb` from top to bottom. This creates the cleaned CSV and the cleaning log.
 4. Run `notebooks/02_exploratory_data_analysis.ipynb` from top to bottom. It reads the cleaned CSV and creates the scatter plot in `visualizations/`.
+5. Run `notebooks/03_visualization.ipynb` from top to bottom. It reads the cleaned CSV and exports the five final charts to `visualizations/`.
 
 ---
 
@@ -85,6 +92,32 @@ Notebook: `notebooks/02_exploratory_data_analysis.ipynb` · Chart: `visualizatio
 
 ---
 
+## Week 3: Visualization and Interpretation
+Notebook: `notebooks/03_visualization.ipynb`
+
+Five charts were created from the cleaned dataset, exported as PNG files, and each is followed by a 2 to 3 sentence interpretation (what it shows, what it may indicate, and one limitation). Bar charts start at zero, every axis has a label and unit, and the values plotted are shown in a table above each chart in the notebook.
+
+| # | Chart | Purpose | Main pattern observed |
+|---|---|---|---|
+| 1 | [Delivery-duration distribution (histogram)](visualizations/01_delivery_duration_distribution.png) | Show what a typical delivery looks like and whether extreme values exist | Median 26 min, mean 26.3 min; the middle 50% took 19 to 32 min; close to symmetric (skewness 0.49); 270 deliveries (0.6%) are statistical outliers |
+| 2 | [Median duration by traffic level (bar chart)](visualizations/02_traffic_comparison.png) | Compare delivery time across traffic categories, with group sizes | Medians of 20 min (Low), 27 (Medium), 27 (High) and 31 (Jam); Jam deliveries also travel farther on average |
+| 3 | [Average duration by weather (bar chart)](visualizations/03_weather_comparison.png) | Compare average delivery time across weather conditions | Cloudy and Fog highest (28.9 min each), Sunny lowest (21.9 min), against an overall mean of 26.3 min |
+| 4 | [Distance vs. duration (scatter plot)](visualizations/04_distance_vs_duration.png) | Show the direction and strength of the distance relationship and unusual points | Moderate positive relationship (r = 0.321, n = 41,513); distance accounts for about 10% of the variation |
+| 5 | [Duration by vehicle type (box plot)](visualizations/05_vehicle_comparison.png) | Compare whole distributions (median, spread, outliers) across vehicle types | Medians of 24 to 26 min; wide spread in every group; only 68 bicycle deliveries, so that group is unreliable |
+
+![Delivery duration distribution](visualizations/01_delivery_duration_distribution.png)
+![Traffic comparison](visualizations/02_traffic_comparison.png)
+![Weather comparison](visualizations/03_weather_comparison.png)
+![Distance vs duration](visualizations/04_distance_vs_duration.png)
+![Vehicle comparison](visualizations/05_vehicle_comparison.png)
+
+**Limitations**
+- Every chart shows an association, not a cause. Traffic, distance, weather and vehicle type overlap, and none of the charts control for the others.
+- Distance is straight-line and available only for rows with valid coordinates (8.9% excluded).
+- Missing traffic and weather values (601 and 616 deliveries) are excluded from their charts.
+- Group sizes are uneven (for example 68 bicycle deliveries against 26,429 motorcycle deliveries), which the box plot labels show.
+
+---
+
 ## Next steps
-- Week 3: five finalised visualisations with plain-language interpretations
-- Week 4: findings, recommendations and the final report
+- Week 4: findings, operational recommendations and the final report
